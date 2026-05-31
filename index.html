@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading | IYF Coding Team</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --primary: #6c5ce7;       /* Deep Purple */
+            --secondary: #a29bfe;     /* Light Purple */
+            --accent: #fd79a8;        /* Pinkish accent for gradient */
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        
+        .loader-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .spinner-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .spinner-ring {
+            position: absolute;            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--primary);
+            border-left-color: var(--primary);
+            animation: spin 1.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.1);
+        }
+
+     
+        .spinner-ring::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--secondary);
+            border-right-color: var(--secondary);
+            animation: spin-reverse 2.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+        }
+
+       
+        .spinner-dot {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            animation: spin 1.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+        }
+
+        .spinner-dot::after {
+            content: "";
+            position: absolute;
+            top: -6px; /* Aligns with border */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary);
+        }
+
+           .center-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            opacity: 0;
+            animation: pulse-fade 2s infinite;
+        }
+
+        
+        .loading-text-group {
+            text-align: center;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+        }
+
+        .status-msg {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: monospace;
+            margin-bottom: 20px;
+            height: 20px; /* Prevent jump */
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: width 0.2s ease-out;
+        }
+
+        
+        @keyframes spin {            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-reverse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes pulse-fade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease;
+        }
+
+        
+        .bg-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(162,155,254,0.15) 0%, rgba(255,255,255,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob"></div>
+
+    <div class="loader-wrapper" id="loader">
+        
+      
+        <div class="spinner-container">
+            <div class="spinner-ring"></div>
+            <div class="spinner-dot"></div>
+            <div class="center-logo"></></div>
+        </div>
+
+     
+        <div class="loading-text-group">            <div class="brand-name">IYF Coding Team</div>
+            <div class="status-msg" id="status">Initializing system...</div>
+            
+          
+            <div class="progress-container">
+                <div class="progress-bar" id="bar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const barEl = document.getElementById('bar');
+        const loaderEl = document.getElementById('loader');
+
+       
+        const steps = [
+            "Loading core modules...",
+            "Establishing secure connection...",
+            "Fetching user data...",
+            "Compiling assets...",
+            "Redirecting to dashboard..."
+        ];
+
+        let progress = 0;
+        
+      
+        const interval = setInterval(() => {
+            
+            progress += Math.random() * 4; 
+            
+            if (progress > 100) progress = 100;
+            
+            
+            barEl.style.width = `${progress}%`;
+
+         
+            if (progress < 20) statusEl.innerText = steps[0];
+            else if (progress < 45) statusEl.innerText = steps[1];
+            else if (progress < 70) statusEl.innerText = steps[2];
+            else if (progress < 90) statusEl.innerText = steps[3];
+            else statusEl.innerText = steps[4];
+
+            
+            if (progress === 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loaderEl.classList.add('fade-out');
+                    setTimeout(() => {                        window.location.href = "dashboard.html";
+                    }, 800);
+                }, 500);
+            }
+        }, 80);
+    </script>
+</body>
+</html>
