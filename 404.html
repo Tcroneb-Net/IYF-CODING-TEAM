@@ -1,197 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 | Page Not Found</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --bg-color: #f8f9fd;
-            --text-dark: #2d3436;
-            --text-light: #636e72;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | Page Not Found</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+  <style>
+    :root {
+      --primary: #6c5ce7;
+      --secondary: #a29bfe;
+      --bg-color: #f8f9fd;
+      --text-dark: #2d3436;
+      --text-light: #636e72;
+    }
 
-        /* Background Blobs */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            opacity: 0.6;
-            z-index: 0;
-            animation: float 10s infinite alternate;
-        }
-        .blob-1 {
-            top: -10%; left: -10%; width: 500px; height: 500px;
-            background: #e0dcfc;
-        }
-        .blob-2 {
-            bottom: -10%; right: -10%; width: 400px; height: 400px;
-            background: #ffeaa7; opacity: 0.4;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Main Card */
-        .error-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);            padding: 60px 40px;
-            border-radius: 24px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(108, 92, 231, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            max-width: 500px;
-            width: 90%;
-            z-index: 10;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideUp 0.8s ease forwards;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
 
-        /* The Big 404 Text */
-        .error-code {
-            font-size: 8rem;
-            line-height: 1;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            position: relative;
-        }
+    /* Background blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      z-index: 0;
+      animation: float 10s infinite alternate ease-in-out;
+    }
 
-        .error-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
+    .blob-1 {
+      width: 500px;
+      height: 500px;
+      background: #dcd6ff;
+      top: -150px;
+      left: -150px;
+    }
 
-        h2 {
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
+    .blob-2 {
+      width: 400px;
+      height: 400px;
+      background: #ffeaa7;
+      bottom: -120px;
+      right: -120px;
+    }
 
-        p {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
+    /* Card */
+    .error-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 550px;
+      padding: 50px 35px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 20px 60px rgba(108,92,231,0.15);
 
-        .info-box {
-            background: rgba(108, 92, 231, 0.05);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            text-align: left;            margin-bottom: 30px;
-            border-radius: 8px;
-        }
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
 
-        .info-box h4 {
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .error-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite;
+    }
 
-        .info-box p {
-            font-size: 0.85rem;
-            margin-bottom: 0;
-            color: var(--text-dark);
-        }
+    .error-code {
+      font-size: 7rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 15px;
 
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+      );
 
-        .btn {
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
-        }
+    h1 {
+      color: var(--text-dark);
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
 
-        .btn-primary:hover {
-            background: #5649c0;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(108, 92, 231, 0.4);
-        }
+    p {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 25px;
+      font-size: 1rem;
+    }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #dfe6e9;
-            color: var(--text-light);        }
+    .info-box {
+      background: rgba(108,92,231,0.05);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
 
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
+    .info-box h4 {
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-        /* Animations */
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .info-box p {
+      margin: 0;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+    }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(30px, 30px); }
-        }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+    .btn {
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      font-size: 0.95rem;
+    }
 
-    </style>
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 20px rgba(108,92,231,0.3);
+    }
+
+    .btn-primary:hover {
+      background: #5649c0;
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      border: 2px solid #dfe6e9;
+      color: var(--text-light);
+      background: white;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(30px, 30px);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .error-code {
+        font-size: 5rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .error-card {
+        padding: 40px 25px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
 
-    <div class="error-card">
-        <div class="error-icon">🚀</div>
-        <div class="error-code">404</div>
-        <h2>Page Not Found</h2>
-        
-        <p>Oops! The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+  <div class="error-card">
 
-        <!-- Educational Info Box -->
-        <div class="info-box">
-            <h4>What is a 404 Error?</h4>
-            <p>A 404 error means the server cannot find the requested resource. It usually happens when a link is broken or the URL was typed incorrectly.</p>
-        </div>
+    <div class="error-icon">🚀</div>
 
-        <div class="btn-group">
-            <a href="dashboard.html" class="btn btn-primary">Back to Dashboard</a>
-            <a href="index.html" class="btn btn-outline">Home</a>
-        </div>
+    <div class="error-code">404</div>
+
+    <h1>Page Not Found</h1>
+
+    <p>
+      The page you are looking for may have been moved,
+      deleted, or never existed.
+    </p>
+
+    <div class="info-box">
+      <h4>What happened?</h4>
+      <p>
+        A 404 error means the server could not find
+        the page you requested.
+      </p>
     </div>
+
+    <div class="btn-group">
+      <a href="/" class="btn btn-primary">
+        Go Home
+      </a>
+
+      <a href="javascript:history.back()" class="btn btn-outline">
+        Go Back
+      </a>
+    </div>
+
+  </div>
 
 </body>
 </html>
