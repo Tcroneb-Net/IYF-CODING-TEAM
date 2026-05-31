@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us | IYF Coding Team</title>
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary: #a29bfe;
+            --bg-body: #f4f7fc;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --success: #00b894;
+            --warning: #fdcb6e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVIGATION (Simple) --- */
+        .nav-bar {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);            font-weight: 500;
+            transition: 0.3s;
+        }
+        .back-link:hover { color: var(--primary); }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        /* --- HEADER SECTION --- */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .highlight-text {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(108, 92, 231, 0.2);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;        }
+
+        /* --- TRIBUTE CARD --- */
+        .tribute-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tribute-card::before {
+            content: '\f109'; /* Graduation Cap Icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 150px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .tribute-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .teacher-name {
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* --- DONATION GRID --- */
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .payment-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .omari-bg { background: #fff0f0; color: #ff4757; }
+        .ecocash-bg { background: #f0f8ff; color: #0984e3; }
+        .mukuru-bg { background: #fff8e1; color: #ffa502; }
+
+        .payment-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .payment-details {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .copy-hint {
+            font-size: 0.85rem;            color: var(--text-muted);
+            cursor: pointer;
+        }
+        
+        .copy-hint:hover { color: var(--primary); }
+
+        /* Badges */
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-active { background: rgba(0, 184, 148, 0.1); color: var(--success); }
+        .badge-soon { background: rgba(253, 203, 110, 0.2); color: #e17055; }
+
+        /* Disabled state for coming soon */
+        .disabled-card {
+            opacity: 0.7;
+            background: #f9f9f9;
+        }
+
+        /* --- FOOTER INFO --- */
+        .info-footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-bottom: 40px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 30px;
+        }
+
+        .info-footer i { color: var(--primary); margin-right: 5px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media(max-width: 600px) {
+            .header-section h1 { font-size: 2rem; }
+            .tribute-card { padding: 30px 20px; }
+        }
+    </style></head>
+<body>
+
+    <!-- Simple Nav -->
+    <nav class="nav-bar">
+        <a href="index.html" class="brand"></>IYF DevTeam</a>
+        <a href="dashboard.html" class="back-link">Back to Dashboard</a>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header-section">
+            <h1>Support Our <span class="highlight-text">Mission</span></h1>
+            <p class="intro-text">
+                Your contributions help us keep our websites updated, pay for domains, and access premium APIs. 
+                This is entirely optional—just a way to show love to your teacher.
+            </p>
+        </header>
+
+        <!-- Special Thanks Section -->
+        <div class="tribute-card">
+            <div class="tribute-title">Special Thanks to Our Program</div>
+            <p style="opacity: 0.9; margin-top: 10px;">Empowering the next generation of developers</p>
+            <div class="teacher-name">
+                <i class="fas fa-graduation-cap"></i> IYF FREE WEEKEND ACADEMY
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <h3 style="margin-bottom: 20px; color: var(--text-main);">Payment Methods</h3>
+        
+        <div class="donation-grid">
+            
+            <!-- Omari (Active) -->
+            <div class="payment-card">
+                <span class="badge badge-active">Active</span>
+                <div class="payment-header">
+                    <div class="icon-box omari-bg"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="payment-title">Omari Wallet</div>
+                </div>
+                <div class="payment-details">+263 788 533181</div> <!-- Replace with real number -->
+                <div class="copy-hint" onclick="alert('Number copied!')"><i class="far fa-copy"></i> Click to Copy</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">
+                    Name: Blessing Anota
+                </p>
+            </div>
+
+            <!-- Ecocash (Coming Soon) -->
+            <div class="payment-card disabled-card">                <span class="badge badge-soon">Coming Soon</span>
+                <div class="payment-header">
+                    <div class="icon-box ecocash-bg"><i class="fas fa-wallet"></i></div>
+                    <div class="payment-title">Ecocash</div>
+                </div>
+                <div class="payment-details" style="color: var(--text-muted);">-- -- --</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">
+                    Integration in progress. Check back later.
+                </p>
+            </div>
+
+            <!-- Mukuru (Coming Soon) -->
+            <div class="payment-card disabled-card">
+                <span class="badge badge-soon">Coming Soon</span>
+                <div class="payment-header">
+                    <div class="icon-box mukuru-bg"><i class="fas fa-globe-africa"></i></div>
+                    <div class="payment-title">Mukuru</div>
+                </div>
+                <div class="payment-details" style="color: var(--text-muted);">-- -- --</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">
+                    International transfers coming soon.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Footer Info -->
+        <footer class="info-footer">
+            <p><i class="fas fa-heart"></i> Your donation keeps our websites up-to-date and running smoothly.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Thank you for supporting <strong>Blessing Anota</strong> and the IYF Academy.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
